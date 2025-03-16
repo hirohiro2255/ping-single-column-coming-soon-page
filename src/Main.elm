@@ -5,6 +5,7 @@ import Html exposing (Html, button, div, form, h1, h2, img, input, main_, p, sec
 import Html.Attributes exposing (class, classList, placeholder, src, style, type_, value)
 import Html.Events exposing (onInput, onSubmit)
 import Regex
+import VitePluginHelper
 
 
 type alias Model =
@@ -48,7 +49,7 @@ view model =
             , section []
                 [ img
                     [ class "image"
-                    , src "src/assets/illustration-dashboard.png"
+                    , src <| VitePluginHelper.asset "/src/assets/illustration-dashboard.png"
                     ]
                     []
                 ]
