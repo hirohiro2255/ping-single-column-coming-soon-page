@@ -1,0 +1,21 @@
+:root {
+  --primary-blue: hsl(223, 87%, 63%);
+  --secondary-pale-blue: hsl(223, 100%, 88%);
+  --secondary-light-red: hsl(354, 100%, 66%);
+  --gray: hsl(0, 0%, 59%);
+  --very-dark-blue: hsl(209, 33%, 12%);
+  font-family: "Libre Franklin", sans-serif;
+}
+
+body {
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.title {
+}

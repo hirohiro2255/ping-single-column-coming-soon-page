@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, form, input, small, text)
-import Html.Attributes exposing (placeholder, type_, value)
+import Html exposing (Html, button, div, form, h1, h2, input, main_, p, section, small, text)
+import Html.Attributes exposing (class, classList, placeholder, type_, value)
 import Html.Events exposing (onInput, onSubmit)
 import Regex
 
@@ -39,21 +39,30 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ form [ onSubmit Submit ]
+    main_ []
+        [ section []
             [ div []
-                [ input
-                    [ type_ "text"
-                    , placeholder "example@example.com"
-                    , onInput Email
-                    , value model.email
-                    ]
-                    []
-                , viewErrorMsg model.error
+                [ h1 [ class "title" ] [ text "PING" ]
+                , h2 [ class "sub-heading" ] [ text "We are launching soon!" ]
+                , p [ class "paragraph" ] [ text "Subscribe and get notified" ]
                 ]
-            , button
-                [ type_ "submit" ]
-                [ text "Notify Me" ]
+            , div []
+                [ form [ onSubmit Submit ]
+                    [ div []
+                        [ input
+                            [ type_ "text"
+                            , placeholder "example@example.com"
+                            , onInput Email
+                            , value model.email
+                            ]
+                            []
+                        , viewErrorMsg model.error
+                        ]
+                    , button
+                        [ type_ "submit" ]
+                        [ text "Notify Me" ]
+                    ]
+                ]
             ]
         , text model.email
         ]
