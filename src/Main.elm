@@ -1,8 +1,8 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, form, h1, h2, input, main_, p, section, small, text)
-import Html.Attributes exposing (class, classList, placeholder, style, type_, value)
+import Html exposing (Html, button, div, form, h1, h2, img, input, main_, p, section, small, text)
+import Html.Attributes exposing (class, classList, placeholder, src, style, type_, value)
 import Html.Events exposing (onInput, onSubmit)
 import Regex
 
@@ -45,7 +45,13 @@ view model =
                 [ viewHeaderSection
                 , viewFormSection model
                 ]
-            , section [] [ text model.email ]
+            , section []
+                [ img
+                    [ class "image"
+                    , src "src/assets/illustration-dashboard.png"
+                    ]
+                    []
+                ]
             ]
         ]
 
