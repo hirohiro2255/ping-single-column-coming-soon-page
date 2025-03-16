@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (Html, button, div, form, h1, h2, input, main_, p, section, small, text)
-import Html.Attributes exposing (class, classList, placeholder, type_, value)
+import Html.Attributes exposing (class, classList, placeholder, style, type_, value)
 import Html.Events exposing (onInput, onSubmit)
 import Regex
 
@@ -39,38 +39,63 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    main_ []
-        [ section []
-            [ div []
-                [ h1 [ class "title" ] [ text "PING" ]
-                , h2 [ class "sub-heading" ] [ text "We are launching soon!" ]
-                , p [ class "paragraph" ] [ text "Subscribe and get notified" ]
+    main_ [ class "container" ]
+        [ div [ class "container-wrapper" ]
+            [ section []
+                [ viewHeaderSection
+                , viewFormSection model
                 ]
-            , div []
-                [ form [ onSubmit Submit ]
-                    [ div []
-                        [ input
-                            [ type_ "text"
-                            , placeholder "example@example.com"
-                            , onInput Email
-                            , value model.email
-                            ]
-                            []
-                        , viewErrorMsg model.error
-                        ]
-                    , button
-                        [ type_ "submit" ]
-                        [ text "Notify Me" ]
-                    ]
-                ]
+            , section [] [ text model.email ]
             ]
-        , text model.email
+        ]
+
+
+viewHeaderSection : Html msg
+viewHeaderSection =
+    div []
+        [ h1 [ class "title" ] [ text "PING" ]
+        , h2 [ class "sub-heading" ] [ text "We are launching " ]
+        , p [ class "paragraph" ] [ text "Subscribe and get notified" ]
+        ]
+
+
+viewFormSection : Model -> Html Msg
+viewFormSection model =
+    div [ class "form-container" ]
+        [ form [ class "form", onSubmit Submit ]
+            [ div [ class "email-input-wrapper" ]
+                [ input
+                    [ type_ "text"
+                    , placeholder "example@example.com"
+                    , onInput Email
+                    , value model.email
+                    , class "email"
+                    , classList
+                        [ ( "email", True )
+                        , ( "input-error", not (String.length model.error == 0) )
+                        ]
+                    ]
+                    []
+                , viewErrorMsg model.error
+                ]
+            , button
+                [ type_ "submit", class "button" ]
+                [ text "Notify Me" ]
+            ]
         ]
 
 
 viewErrorMsg : String -> Html msg
 viewErrorMsg errorMsg =
-    small [] [ text errorMsg ]
+    let
+        result =
+            if String.length errorMsg == 0 then
+                "hidden"
+
+            else
+                "visible"
+    in
+    small [ class "error-detail", style "visibility" result ] [ text errorMsg ]
 
 
 pattern =
