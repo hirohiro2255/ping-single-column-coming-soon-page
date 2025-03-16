@@ -1,9 +1,10 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, form, h1, h2, img, input, main_, p, section, small, text)
-import Html.Attributes exposing (class, classList, placeholder, src, style, type_, value)
+import Html exposing (Html, a, button, div, footer, form, h1, h2, i, img, input, main_, p, section, small, text)
+import Html.Attributes exposing (class, classList, href, placeholder, property, src, style, target, type_, value)
 import Html.Events exposing (onInput, onSubmit)
+import Json.Encode exposing (string)
 import Regex
 import VitePluginHelper
 
@@ -54,6 +55,7 @@ view model =
                     []
                 ]
             ]
+        , viewFooter
         ]
 
 
@@ -105,6 +107,23 @@ viewErrorMsg errorMsg =
     small [ class "error-detail", style "visibility" result ] [ text errorMsg ]
 
 
+viewFooter : Html msg
+viewFooter =
+    footer [ class "footer" ]
+        [ div [ class "footer-wrapper" ]
+            [ a [ class "sns-icon", href "https://facebook.com", target "_blank" ]
+                [ i [ class "fab", class "fa-facebook-f" ] [] ]
+            , a
+                [ class "sns-icon", href "https://twitter.com", target "_blank" ]
+                [ i [ class "fab", class "fa-twitter" ] [] ]
+            , a
+                [ class "sns-icon", href "https://instagram.com", target "_blank" ]
+                [ i [ class "fab", class "fa-instagram" ] [] ]
+            ]
+        , p [ class "copyright " ] [ text <| htmlDecode "&copy; Copyright Ping. All rights reserved." ]
+        ]
+
+
 pattern =
     "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
 
@@ -124,6 +143,19 @@ validateEmail email =
 
     else
         ""
+
+
+htmlDecode str =
+    let
+        replace ( s1, s2 ) src =
+            String.join s2 <| String.split s1 src
+
+        chrmap =
+            [ ( "&reg;", "®" )
+            , ( "&copy;", "©" )
+            ]
+    in
+    List.foldl replace str chrmap
 
 
 main =
