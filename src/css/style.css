@@ -120,6 +120,7 @@ p {
   line-height: 2;
   letter-spacing: 0.13px;
   color: var(--secondary-light-red);
+  height: 20px;
 }
 
 .button {
@@ -223,6 +224,13 @@ p {
   .email {
     padding-top: 16px;
     padding-bottom: 16px;
+    padding-left: 30px;
+  }
+
+  .error-detail {
+    align-self: start;
+    padding-left: 30px;
+    margin-top: 6px;
   }
 
   .button {
